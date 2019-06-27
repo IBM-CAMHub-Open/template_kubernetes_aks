@@ -1,3 +1,8 @@
+provider "azurerm" {
+  # Ensure provider version supports the 'azurem_kubernetes_service_versions' data source
+  version = ">= 1.29.0"
+}
+
 # Use regular expression to validate format of given kubernetes version
 resource "null_resource" "validate-kube-version" {
   provisioner "local-exec" {

@@ -13,16 +13,22 @@ Via this template, a configurable number of worker agents can be deployed.
 
 ## Template input parameters
 
-| Parameter name         | Parameter description |
-| :---                   | :---        |
-| cluster_name           | Name of the AKS cluster |
-| azure_region           | Region within the cloud in which to create the cluster |
-| resource\_group\_name  | Name of the resource group in which the cluster will be created |
-| dns_prefix             | DNS name prefix for the cluster |
-| kube_version           | Kubernetes version for the cluster. Specify 'latest' for the most recent kubernetes version supported by the Kubernetes Service, or a version number in the X.Y[.Z] format (e.g. 1.13 or 1.13.5).  The most recent maintenance release for the specified version will be selected. |
-| principal_id           | Service principal ID |
-| principal_password     | Service principal password |
-| username               | Login name used to access the worker agent VM |
-| ssh\_public\_key       | Public key used to grant access to the worker agent VM, Base64 encoded |
-| worker\_vm\_size       | Size of the worker node VM |
-| worker_count           | Number of worker agents |
+| Parameter name                  | Parameter description | Allowed values |
+| :---                            | :---        | :--- |
+| cluster_name                    | Name of the AKS cluster | |
+| azure_region                    | Region within the cloud in which to create the cluster | |
+| resource\_group\_name           | Name of the resource group in which the cluster will be created | |
+| dns_prefix                      | DNS name prefix for the cluster | |
+| kube_version                    | Kubernetes version for the cluster. Specify 'latest' for the most recent kubernetes version supported by the Kubernetes Service, or a version number in the X.Y[.Z] format (e.g. 1.13 or 1.13.5).  The most recent maintenance release for the specified version will be selected. | |
+| principal_id                    | Service principal ID | |
+| principal_password              | Service principal password | |
+| username                        | Login name used to access the worker agent VM | |
+| ssh\_public\_key                | Public key used to grant access to the worker agent VM, Base64 encoded | |
+| worker\_vm\_size                | Size of the worker node VM | |
+| worker_count                    | Number of worker agents | |
+| enable_monitoring               | Indicates whether monitoring should be enabled on the cluster | true, false |
+| monitoring\_solution\_name      | Name of the monitoring solution | |
+| monitoring\_solution\_publisher | Publisher of the monitoring solution | |
+| monitoring\_solution\_product   | Product name of the monitoring solution | |
+| monitoring\_sku                 | Pricing SKU for the monitoring workspace | |
+| monitoring\_retention\_days     | Number of day to retain monitoring data | 30 - 730 |

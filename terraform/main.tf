@@ -1,6 +1,6 @@
 provider "azurerm" {
   # Ensure provider version supports the 'azurem_kubernetes_service_versions' data source
-  version = ">= 1.29.0"
+  version = ">= 1.29.0, < 1.32.0"
 }
 
 # Use regular expression to validate format of given kubernetes version
@@ -39,6 +39,40 @@ locals {
                           data.azurerm_kubernetes_service_versions.current.latest_version}"
 }
 
+
+# Monitoring-related resources
+resource "random_id" "workspace" {
+  keepers = {
+    # Generate a new id each time we switch to a new resource group
+    group_name = "${azurerm_resource_group.cluster_resource_group.name}"
+  }
+
+  byte_length = 8
+}
+
+resource "azurerm_log_analytics_workspace" "workspace" {
+  name                = "k8s-workspace-${random_id.workspace.hex}"
+  location            = "${azurerm_resource_group.cluster_resource_group.location}"
+  resource_group_name = "${azurerm_resource_group.cluster_resource_group.name}"
+  sku                 = "${var.monitoring_sku}"
+  retention_in_days   = "${var.monitoring_retention_days}"
+}
+
+resource "azurerm_log_analytics_solution" "solution" {
+  solution_name         = "${var.monitoring_solution_name}"
+  location              = "${azurerm_resource_group.cluster_resource_group.location}"
+  resource_group_name   = "${azurerm_resource_group.cluster_resource_group.name}"
+  workspace_resource_id = "${azurerm_log_analytics_workspace.workspace.id}"
+  workspace_name        = "${azurerm_log_analytics_workspace.workspace.name}"
+
+  plan {
+    publisher = "${var.monitoring_solution_publisher}"
+    product   = "${var.monitoring_solution_product}"
+  }
+}
+
+
+# Create the cluster
 resource "azurerm_kubernetes_cluster" "aks_cluster" {
   name                = "${var.cluster_name}"
   location            = "${azurerm_resource_group.cluster_resource_group.location}"
@@ -65,5 +99,12 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   service_principal {
     client_id     = "${var.principal_id}"
     client_secret = "${var.principal_password}"
+  }
+
+  addon_profile {
+    oms_agent {
+      enabled                    = "${var.enable_monitoring}"
+      log_analytics_workspace_id = "${azurerm_log_analytics_workspace.workspace.id}"
+    }
   }
 }

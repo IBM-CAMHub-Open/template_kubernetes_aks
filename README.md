@@ -15,7 +15,7 @@ Via this template, a configurable number of worker agents can be deployed.
 
 | Parameter name                  | Parameter description | Allowed values |
 | :---                            | :---        | :--- |
-| cluster_name                    | Name of the AKS cluster | |
+| cluster_name                    | Name of the AKS cluster | Cluster name can have lower case alphabets, numbers and dash. Must start with lower case alphabet and end with alpha-numeric character. Maximum length is 32 characters. |
 | azure_region                    | Region within the cloud in which to create the cluster | |
 | resource\_group\_name           | Name of the resource group in which the cluster will be created | |
 | dns_prefix                      | DNS name prefix for the cluster | |

@@ -1,5 +1,5 @@
 {
-  "terraform_version": "~> 0.11.0",
+  "terraform_version": ">= 1.0.0",
   "input_datatypes": [],
   "output_datatypes": [
     {
@@ -245,29 +245,6 @@
       "required": true,
       "immutable": false,
       "group_name": "workernodes"
-    },
-    {
-      "name": "enable_monitoring",
-      "type": "string",
-      "description": "Enable monitoring of the cluster",
-      "label": "Enable cluster monitoring",
-      "default": "true",
-      "secured": false,
-      "hidden": false,
-      "options": [
-        {
-          "value": "true",
-          "label": "true",
-          "default": true
-        },
-        {
-          "value": "false",
-          "label": "false"
-        }
-      ],
-      "required": true,
-      "immutable": false,
-      "group_name": "monitoring"
     },
     {
       "name": "monitoring_solution_name",

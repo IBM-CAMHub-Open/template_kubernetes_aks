@@ -1,7 +1,7 @@
 {
-  "name": "Microsoft Azure Kubernetes Service",
-  "description": "Managed Kubernetes Service within Microsoft Azure",
-  "version": "1.0",
+  "name": "Microsoft Azure Kubernetes Service for Terraform 1.x.x",
+  "description": "Managed Kubernetes Service within Microsoft Azure for Terraform 1.x.x",
+  "version": "2.0",
   "type": "prebuilt",
   "manifest": {
     "template_type": "Terraform",

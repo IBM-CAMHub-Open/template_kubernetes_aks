@@ -42,10 +42,6 @@ variable "worker_count" {
   description = "Number of worker nodes"
 }
 
-variable "enable_monitoring" {
-  description = "Indicates whether monitoring of the cluster should be enabled"
-}
-
 variable "monitoring_solution_name" {
   description = "Name of the monitoring solution"
 }
@@ -65,3 +61,4 @@ variable "monitoring_sku" {
 variable "monitoring_retention_days" {
   description = "Number of days (30 - 730) to retain monitoring data"
 }
+
